@@ -1,0 +1,11 @@
+Javascript cursor position in a textarea or textfield
+=====================================================
+
+  This small library allows to obtain the following information with Javascript:
+  - cursor position in a textarea (column, row) - characters
+  - cursor position in a textarea (left, top) - pixels
+
+  More docs will follow later..
+
+--
+Copyright (c) 2010 Kirill Maximov, released under the MIT license
