@@ -1,11 +1,32 @@
 Javascript cursor position in a textarea or textfield
 =====================================================
 
-  This small library allows to obtain the following information with Javascript:
-  - cursor position in a textarea (column, row) - characters
-  - cursor position in a textarea (left, top) - pixels
+Essence
+-------
+  To obtain the text cursor position in textarea or in textfield.
+  Cursor position is provided either in characters, or in pixes relative to top left corner of the textarea.
 
-  More docs will follow later..
+Why
+---
+  The library can be used for positioning of a completion popup window in a textarea or input text field right
+  near current text cursor. Given that long text is wrapped in the textarea, the task is not very trivial.
+
+How
+---
+  The library tries to model text wrapping in the textarea and to find out relative cursor position.
+  The results are not 100% accurate, but really close to it.
+
+  Usage:
+
+  var positioner = new maxkir.CursorPosition(textarea_element, 3);
+  alert(positioner.getCursorCoordinates());  // [x, y] position of cursor in textarea in characters
+  alert(positioner.getPixelCoordinates());   // [x, y] position of cursor in textarea in pixels
+    
+  See also functional test under test/cursor_position_test.html
+
+Dependencies
+------------
+  None, plain javascript code
 
 --
 Copyright (c) 2010 Kirill Maximov, released under the MIT license

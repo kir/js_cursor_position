@@ -14,7 +14,7 @@ if (typeof document.defaultView == 'undefined') {
 // pointX/pointY
 // See getCursorCoordinates and getPixelCoordinates
 maxkir.CursorPosition = function(element, padding) {
-  this.element = $(element);
+  this.element = element;
   this.padding = padding;
 
   var that = this;
