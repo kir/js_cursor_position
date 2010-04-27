@@ -18,6 +18,14 @@
         $('pointer').style.left = (t_pos.left + child_pos[0]) + "px";
         $('pointer').style.top = (t_pos.top + child_pos[1]) + "px";
       });
+      var positioner = new maxkir.CursorPosition($('text_field'), 7);
+      $('text_field').observe("click", function(e) {
+        var child_pos = positioner.getPixelCoordinates();
+        //alert(positioner.getCursorCoordinates())
+        var t_pos = $('text_field').cumulativeOffset(); 
+        $('pointer').style.left = (t_pos.left + child_pos[0]) + "px";
+        $('pointer').style.top = (t_pos.top + child_pos[1]) + "px";
+      });
     }
 
   </script>
@@ -39,5 +47,8 @@ font-weight: bold; font-style: italic; line-height: 3; padding: 7px;">
 
 </textarea>
 
+  <br/>
+
+  <input type="text" id="text_field" size="90" value="sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.">
 </body>
 </html>

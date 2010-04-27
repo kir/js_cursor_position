@@ -27,12 +27,18 @@ maxkir.CursorPosition = function(element, padding) {
       // We'll use this as a 'dummy'
       var stored_range = range.duplicate();
       // Select all text
-      stored_range.moveToElementText( element );
+      if (element.type == 'text') {
+        stored_range.moveStart('character', -element.value.length);
+        stored_range.moveEnd('character', element.value.length);
+      } else { // textarea
+        stored_range.moveToElementText( element );
+      }
       // Now move 'dummy' end point to end point of original range
       stored_range.setEndPoint( 'EndToEnd', range );
       // Now we can calculate start and end points
-      element.selectionStart = stored_range.text.length - range.text.length;
-      element.selectionEnd = element.selectionStart + range.text.length;
+      var selectionStart = stored_range.text.length - range.text.length;
+      var selectionEnd = selectionStart + range.text.length;
+      return [selectionStart, selectionEnd];
     }
     return [element.selectionStart, element.selectionEnd];
   };
