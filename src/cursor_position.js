@@ -19,7 +19,7 @@ maxkir.CursorPosition = function(element, padding) {
 
   var that = this;
 
-  this.get_selection_range = function() {
+  var get_sel_range = function() {
     // thanks to http://the-stickman.com/web-development/javascript/finding-selection-cursor-position-in-a-textarea-in-internet-explorer/
     if( (typeof element.selectionStart == 'undefined') && document.selection ){
       // The current selection
@@ -41,6 +41,15 @@ maxkir.CursorPosition = function(element, padding) {
       return [selectionStart, selectionEnd];
     }
     return [element.selectionStart, element.selectionEnd];
+  };
+
+  this.get_selection_range = function() {
+    try {
+      return get_sel_range();
+    }
+    catch(e) {
+      return [0,0]
+    }
   };
 
   var clone_css_style = function(target, styleName) {
