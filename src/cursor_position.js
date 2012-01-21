@@ -52,43 +52,8 @@ maxkir.CursorPosition = function(element, padding) {
     }
   };
 
-  var clone_css_style = function(target, styleName) {
-    var val = element.style[styleName];
-    if (!val) {
-      var css = document.defaultView.getComputedStyle(element, null);
-      val = css ? css[styleName] : null;
-    }
-    if (val) {
-      target.style[styleName] = val;
-    }
-  };
-
   this.get_string_metrics = function(s) {
-    var widthElementId = "__widther";
-    var div = document.getElementById(widthElementId);
-    if (!div) {
-      div = document.createElement("div");
-      div.id = widthElementId;
-      document.body.appendChild(div);
-
-      div.style.position = 'absolute';
-      div.style.left = '-10000px';
-    }
-
-    clone_css_style(div, 'fontSize');
-    clone_css_style(div, 'fontFamily');
-    clone_css_style(div, 'fontWeight');
-    clone_css_style(div, 'fontVariant');
-    clone_css_style(div, 'fontStyle');
-    clone_css_style(div, 'textTransform');
-    clone_css_style(div, 'lineHeight');
-
-    div.style.width = '0';
-    div.style.paddingLeft = that.padding + "px";
-
-    div.innerHTML = s.replace(' ', "&nbsp;");
-    div.style.width = 'auto';
-    return [div.offsetWidth, div.offsetHeight];
+    return maxkir.CursorPosition.getTextMetrics(element, s, padding);
   };
 
   var splitter = new maxkir.StringSplitter(function(s) {
@@ -120,4 +85,51 @@ maxkir.CursorPosition.prototype.getPixelCoordinates = function() {
   var w = m[0];
   var h = m[1] * lines.length - this.element.scrollTop + this.padding;
   return [w, h];
+};
+
+/** Return preferred [width, height] of the text as if it was written inside styledElement (textarea)
+ * @param styledElement element to copy styles from
+ * @s text for metrics calculation
+ * @padding - explicit additional padding
+ * */
+maxkir.CursorPosition.getTextMetrics = function(styledElement, s, padding) {
+
+  var element = styledElement;
+  var clone_css_style = function(target, styleName) {
+    var val = element.style[styleName];
+    if (!val) {
+      var css = document.defaultView.getComputedStyle(element, null);
+      val = css ? css[styleName] : null;
+    }
+    if (val) {
+      target.style[styleName] = val;
+    }
+  };
+
+  var widthElementId = "__widther";
+  var div = document.getElementById(widthElementId);
+  if (!div) {
+    div = document.createElement("div");
+    document.body.appendChild(div)
+    div.id = widthElementId;
+
+    div.style.position = 'absolute';
+    div.style.left = '-10000px';
+  }
+
+  clone_css_style(div, 'fontSize');
+  clone_css_style(div, 'fontFamily');
+  clone_css_style(div, 'fontWeight');
+  clone_css_style(div, 'fontVariant');
+  clone_css_style(div, 'fontStyle');
+  clone_css_style(div, 'textTransform');
+  clone_css_style(div, 'lineHeight');
+
+  div.style.width = '0';
+  div.style.paddingLeft = padding + "px";
+
+  div.innerHTML = s.replace(' ', "&nbsp;");
+  div.style.width = 'auto';
+  return [div.offsetWidth, div.offsetHeight];
+
 };
