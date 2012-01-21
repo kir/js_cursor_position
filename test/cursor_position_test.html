@@ -10,19 +10,18 @@
   <script type="text/javascript">
 
     window.onload = function() {
-      var positioner = new maxkir.CursorPosition($('text_area'), 7);
+      var positioner1 = new maxkir.CursorPosition($('text_area'), 7);
       $('text_area').observe("click", function(e) {
-        var child_pos = positioner.getPixelCoordinates();
-        //alert(positioner.getCursorCoordinates())
+        var child_pos = positioner1.getPixelCoordinates();
+//        alert(positioner1.getCursorCoordinates())
         var t_pos = $('text_area').cumulativeOffset(); 
         $('pointer').style.left = (t_pos.left + child_pos[0]) + "px";
         $('pointer').style.top = (t_pos.top + child_pos[1]) + "px";
       });
-      var positioner = new maxkir.CursorPosition($('text_field'), 7);
+      var positioner2 = new maxkir.CursorPosition($('text_field'), 7);
       $('text_field').observe("click", function(e) {
-        var child_pos = positioner.getPixelCoordinates();
-        //alert(positioner.getCursorCoordinates())
-        var t_pos = $('text_field').cumulativeOffset(); 
+        var child_pos = positioner2.getPixelCoordinates();
+        var t_pos = $('text_field').cumulativeOffset();
         $('pointer').style.left = (t_pos.left + child_pos[0]) + "px";
         $('pointer').style.top = (t_pos.top + child_pos[1]) + "px";
       });
