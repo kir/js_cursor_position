@@ -16,41 +16,9 @@ if (typeof document.defaultView == 'undefined') {
 maxkir.CursorPosition = function(element, padding) {
   this.element = element;
   this.padding = padding;
+  this.selection_range = new maxkir.SelectionRange(element);
 
   var that = this;
-
-  var get_sel_range = function() {
-    // thanks to http://the-stickman.com/web-development/javascript/finding-selection-cursor-position-in-a-textarea-in-internet-explorer/
-    if( (typeof element.selectionStart == 'undefined') && document.selection ){
-      // The current selection
-      var range = document.selection.createRange();
-      // We'll use this as a 'dummy'
-      var stored_range = range.duplicate();
-      // Select all text
-      if (element.type == 'text') {
-        stored_range.moveStart('character', -element.value.length);
-        stored_range.moveEnd('character', element.value.length);
-      } else { // textarea
-        stored_range.moveToElementText( element );
-      }
-      // Now move 'dummy' end point to end point of original range
-      stored_range.setEndPoint( 'EndToEnd', range );
-      // Now we can calculate start and end points
-      var selectionStart = stored_range.text.length - range.text.length;
-      var selectionEnd = selectionStart + range.text.length;
-      return [selectionStart, selectionEnd];
-    }
-    return [element.selectionStart, element.selectionEnd];
-  };
-
-  this.get_selection_range = function() {
-    try {
-      return get_sel_range();
-    }
-    catch(e) {
-      return [0,0]
-    }
-  };
 
   this.get_string_metrics = function(s) {
     return maxkir.CursorPosition.getTextMetrics(element, s, padding);
@@ -68,7 +36,7 @@ maxkir.CursorPosition = function(element, padding) {
       innerAreaWidth -= 4;
     }
 
-    var pos = that.get_selection_range()[0];
+    var pos = that.selection_range.get_selection_range()[0];
     return splitter.splitString(element.value.substr(0, pos), innerAreaWidth);
   };
 

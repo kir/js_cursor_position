@@ -14,7 +14,7 @@ Why
 How
 ---
   The library tries to model text wrapping in the textarea and to find out relative cursor position.
-  The results are not 100% accurate, but really close to it.
+  The results are not 100% accurate, but really close to it. Tested against IE8+, Chrome, Opera, FF.
 
   Usage:
 
@@ -27,6 +27,7 @@ How
 Dependencies
 ------------
   None, plain javascript code
+
 
 --
 Copyright (c) 2010-2012 Kirill Maximov, released under the MIT license
