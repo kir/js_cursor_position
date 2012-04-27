@@ -5,11 +5,14 @@ if (!window.maxkir) maxkir = {};
  *
  * Usage:
  *
- *  var selection = new maxkir.SelectionRange(textarea).get_selection_range()
+ *  var range = new maxkir.SelectionRange(textarea);
+ *  var selection = range.get_selection_range()
  *  var selectionStart = selection[0]
  *  var selectionEnd   = selection[1]
+ *  On a error, returns [0,0]
  *
- * On a error, returns [0,0]
+ *  var selection_text = range.get_selection_text();
+ *
  *
  * */
 maxkir.SelectionRange = function(element) {
@@ -49,4 +52,9 @@ maxkir.SelectionRange.prototype.get_selection_range = function() {
   catch(e) {
     return [0,0]
   }
+};
+
+maxkir.SelectionRange.prototype.get_selection_text = function() {
+  var r = this.get_selection_range();
+  return this.element.value.substring(r[0], r[1]);
 };
