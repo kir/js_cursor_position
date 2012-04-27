@@ -29,4 +29,4 @@ Dependencies
   None, plain javascript code
 
 --
-Copyright (c) 2010 Kirill Maximov, released under the MIT license
+Copyright (c) 2010-2012 Kirill Maximov, released under the MIT license
