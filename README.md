@@ -1,3 +1,9 @@
+Deprecation notice
+------------------
+ This library is no longer maintained, you may want to take a look at this solution instead: 
+ https://github.com/component/textarea-caret-position
+
+
 JavaScript cursor position in a textarea or input
 =================================================
 
@@ -10,6 +16,11 @@ Why
 ---
   The library can be used for positioning of a completion popup window in a `<textarea>` or `<input>` text field right
   near the caret. Given that long text is wrapped in `<textarea>`s, the task is not very trivial.
+
+Alternative solution
+--------------------
+  There is another, more recent library which uses the same principle and may have less (or different) bugs:
+  https://github.com/component/textarea-caret-position
 
 How
 ---
